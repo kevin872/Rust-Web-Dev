@@ -7,7 +7,7 @@ use home::HomeApp;
 use news::NewsApp;
 
 #[derive(Clone, Routable, PartialEq)]
-enum MainRoute {
+enum Route {
     #[at("/")]
     Home,
     #[at("/news")]
@@ -17,11 +17,11 @@ enum MainRoute {
     NotFound,
 }
 
-fn switch_main(route: MainRoute) -> Html {
+fn switch_main(route: Route) -> Html {
     match route {
-        MainRoute::Home => html! { <HomeApp /> },
-        MainRoute::News => html! { <NewsApp /> },
-        MainRoute::NotFound => html! {<h1>{"Not Found"}</h1>},
+        Route::Home => html! { <HomeApp /> },
+        Route::News => html! { <NewsApp /> },
+        Route::NotFound => html! {<h1>{"Not Found"}</h1>},
     }
 }
 
@@ -29,7 +29,7 @@ fn switch_main(route: MainRoute) -> Html {
 pub fn app() -> Html {
     html! {
         <BrowserRouter>
-            <Switch<MainRoute> render={switch_main} />
+            <Switch<Route> render={switch_main} />
         </BrowserRouter>
     }
 }
